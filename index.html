@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#101c24" />
+    <title>Pixel Sky · First sortie</title>
+  </head>
+  <body>
+    <div id="game"></div>
+    <header>
+      <a class="brand" href="./">PIXEL<span>SKY</span><small>FLIGHT LAB / 001</small></a>
+      <div class="mission">
+        <i></i> ОПЕРАЦИЯ «БЕРЕГ»<small>Уничтожьте три объекта вражеского аэродрома</small>
+      </div>
+      <button id="pause">Ⅱ ПАУЗА</button>
+    </header>
+    <section id="hud" hidden>
+      <div class="panel telemetry">
+        <div class="eyebrow">FLIGHT TELEMETRY <span id="plane-name"></span></div>
+        <div class="gauges">
+          <div><b id="speed">0</b><small>КМ/Ч</small></div>
+          <div><b id="altitude">0</b><small>ВЫСОТА · М</small></div>
+          <div><b id="health">100</b><small>КОРПУС · %</small></div>
+        </div>
+        <div class="health-track"><div id="health-bar"></div></div>
+        <div id="status">СИСТЕМЫ В НОРМЕ</div>
+      </div>
+      <div class="panel weapons">
+        <div class="eyebrow">ПОДВЕСКА / БОЕКОМПЛЕКТ</div>
+        <div><span>SPACE</span> Пушка <b>∞</b></div>
+        <div><span>F / ЛКМ</span> ИК-ракета <b id="missiles">6</b></div>
+        <div><span>B</span> Бомба <b id="bombs">8</b></div>
+        <div><span>C</span> ЛТЦ <b id="flares">12</b></div>
+      </div>
+      <div id="message"></div>
+      <div class="radar panel">
+        <div class="eyebrow">ТАКТИЧЕСКИЙ ОБЗОР <span>24 KM</span></div>
+        <canvas id="radar" width="190" height="160"></canvas
+        ><small>● ВЫ &nbsp; <em>◆ ПРОТИВНИК</em> &nbsp; □ БАЗА</small>
+      </div>
+      <footer>
+        <span
+          ><kbd>A</kbd><kbd>D</kbd> ПОВОРОТ &nbsp; <kbd>W</kbd><kbd>S</kbd> ТЯГА &nbsp; <kbd>Q</kbd
+          ><kbd>E</kbd> ВЫСОТА &nbsp; <kbd>SHIFT</kbd> ФОРСАЖ</span
+        ><span><kbd>TAB</kbd> ЦЕЛЬ &nbsp; <kbd>R</kbd> НОВЫЙ ВЫЛЕТ</span>
+      </footer>
+      <div id="target" class="panel">ЦЕЛЬ НЕ ВЫБРАНА</div>
+    </section>
+    <div id="overlay">
+      <div class="briefing">
+        <div class="eyebrow">ИЗОМЕТРИЧЕСКИЕ АВИАБОИ / ПРОТОТИП 0.1</div>
+        <h1>НЕБО<br />ПОД КОНТРОЛЕМ<span>.</span></h1>
+        <p>
+          Приморский сектор. Два перехватчика в воздухе.<br />Ваша задача — уничтожить вражеский
+          аэродром.
+        </p>
+        <div class="aircraft-picker">
+          <button data-plane="F-16" class="selected">
+            <strong>F-16</strong><small>ЛЁГКИЙ / МАНЁВРЕННЫЙ</small></button
+          ><button data-plane="MiG-35">
+            <strong>MiG-35</strong><small>ТЯЖЁЛЫЙ / ЖИВУЧИЙ</small>
+          </button>
+        </div>
+        <button id="start" class="primary">НАЧАТЬ ВЫЛЕТ <span>↗</span></button>
+        <div class="brief-controls">
+          A/D — поворот · Space — пушка · F — ракета<br />Tab — цель · B — бомба · C — тепловые
+          ловушки
+        </div>
+        <small class="note"
+          >Начинаем уже в воздухе. Над голубой базой — ремонт и пополнение.<br />Для бомб заходите
+          на красные цели: крест на земле — точка попадания.</small
+        >
+      </div>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

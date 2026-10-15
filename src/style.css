@@ -1,0 +1,360 @@
+:root {
+  font-family: Consolas, 'Courier New', monospace;
+  color: #e4eee7;
+  background: #101c24;
+  font-synthesis: none;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  overflow: hidden;
+}
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+#game {
+  position: fixed;
+  inset: 0;
+}
+#hud {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
+canvas {
+  image-rendering: pixelated;
+  display: block;
+}
+header {
+  position: absolute;
+  inset: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 30px;
+  background: linear-gradient(#0b151eee, transparent);
+  pointer-events: none;
+}
+header > * {
+  pointer-events: auto;
+}
+.brand {
+  font-size: 24px;
+  letter-spacing: 4px;
+  text-decoration: none;
+  color: #e8efe7;
+  font-weight: bold;
+}
+.brand span {
+  color: #d9f879;
+}
+.brand small {
+  display: block;
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: #8baba9;
+  margin-top: 5px;
+}
+.mission {
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-align: center;
+}
+.mission small {
+  display: block;
+  font-size: 10px;
+  color: #9bb4b2;
+  letter-spacing: 0;
+  margin-top: 7px;
+}
+.mission i {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background: #d9f879;
+  margin-right: 10px;
+}
+header button {
+  background: #11232cbb;
+  border: 1px solid #516b6b;
+  padding: 10px 15px;
+  font-size: 10px;
+}
+.panel {
+  background: #0b1c25df;
+  border: 1px solid #5e88834d;
+  box-shadow: 0 8px 30px #07121933;
+  padding: 16px;
+}
+.eyebrow {
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  color: #8eaaa8;
+}
+.eyebrow span {
+  float: right;
+  color: #d9f879;
+}
+.telemetry {
+  position: absolute;
+  bottom: 72px;
+  left: 28px;
+  width: 320px;
+}
+.gauges {
+  display: flex;
+  justify-content: space-between;
+  margin: 18px 0;
+}
+.gauges b {
+  display: block;
+  font-size: 28px;
+  font-weight: normal;
+}
+.gauges small {
+  font-size: 9px;
+  color: #8faeac;
+  display: block;
+  margin-top: 5px;
+}
+.health-track {
+  height: 3px;
+  background: #41585c;
+}
+.health-track div {
+  height: 100%;
+  background: #d9f879;
+  transition: width 0.2s;
+}
+#status {
+  font-size: 9px;
+  letter-spacing: 1px;
+  color: #d9f879;
+  margin-top: 10px;
+}
+.weapons {
+  position: absolute;
+  right: 28px;
+  top: 108px;
+  width: 218px;
+}
+.weapons > div:not(:first-child) {
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 15px;
+}
+.weapons span {
+  font-size: 9px;
+  color: #9ab4b1;
+  width: 57px;
+}
+.weapons b {
+  margin-left: auto;
+  color: #d9f879;
+  font-weight: normal;
+}
+.radar {
+  position: absolute;
+  right: 28px;
+  bottom: 72px;
+  width: 224px;
+  padding: 14px 16px;
+}
+.radar canvas {
+  margin: 12px 0;
+}
+.radar small {
+  font-size: 8px;
+  color: #a7cac3;
+}
+.radar em {
+  font-style: normal;
+  color: #ff8b74;
+}
+footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 17px 28px;
+  background: #0b1923eb;
+  color: #9cb4b2;
+  display: flex;
+  justify-content: space-between;
+  font-size: 9px;
+}
+kbd {
+  font: inherit;
+  color: #dde9d5;
+  border: 1px solid #48615f;
+  padding: 3px 4px;
+  margin-right: 3px;
+}
+#message {
+  position: absolute;
+  top: 112px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #d9f879;
+  text-align: center;
+  font-size: 12px;
+  background: #0c1b24c9;
+  padding: 10px 20px;
+  border-left: 2px solid #d9f879;
+  max-width: 50%;
+}
+#message:empty {
+  display: none;
+}
+#target {
+  position: absolute;
+  bottom: 82px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 11px;
+  text-align: center;
+  min-width: 240px;
+  color: #d9f879;
+}
+#overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  padding: 80px 8%;
+  background: linear-gradient(90deg, #0b1927f5 0%, #0b1927e8 38%, #0b192745 80%);
+}
+.briefing {
+  max-width: 570px;
+}
+h1 {
+  font-size: clamp(38px, 5vw, 70px);
+  line-height: 1.04;
+  letter-spacing: -3px;
+  margin: 25px 0;
+  color: #f1f4e9;
+}
+h1 span {
+  color: #d9f879;
+}
+p {
+  font-size: 13px;
+  line-height: 1.8;
+  color: #a6bcb9;
+}
+.aircraft-picker {
+  display: flex;
+  gap: 12px;
+  margin: 27px 0 15px;
+}
+.aircraft-picker button {
+  background: #172b34;
+  border: 1px solid #435c60;
+  padding: 17px 20px;
+  text-align: left;
+  flex: 1;
+}
+.aircraft-picker .selected {
+  border-color: #d9f879;
+  background: #b1d65115;
+}
+.aircraft-picker strong {
+  font-size: 21px;
+  display: block;
+  font-weight: normal;
+}
+.aircraft-picker small {
+  display: block;
+  font-size: 8px;
+  letter-spacing: 1px;
+  color: #95afab;
+  margin-top: 8px;
+}
+.primary {
+  display: block;
+  width: 100%;
+  padding: 18px 20px;
+  background: #d9f879;
+  color: #17251e;
+  border: 0;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-align: left;
+}
+.primary span {
+  float: right;
+}
+.brief-controls {
+  font-size: 11px;
+  line-height: 1.9;
+  margin-top: 23px;
+  color: #becdc3;
+}
+.note {
+  display: block;
+  font-size: 9px;
+  color: #769592;
+  line-height: 1.8;
+  margin-top: 16px;
+}
+[hidden] {
+  display: none !important;
+}
+button:hover {
+  filter: brightness(1.15);
+}
+@media (max-width: 800px) {
+  header {
+    padding: 16px;
+  }
+  .mission {
+    display: none;
+  }
+  .weapons {
+    right: 12px;
+    width: 175px;
+    padding: 12px;
+  }
+  .telemetry {
+    left: 12px;
+    width: 260px;
+    bottom: 65px;
+  }
+  .radar {
+    right: 12px;
+    bottom: 65px;
+    transform: scale(0.8);
+    transform-origin: bottom right;
+  }
+  footer {
+    font-size: 8px;
+    padding: 12px;
+    gap: 15px;
+  }
+  #target {
+    bottom: auto;
+    top: 100px;
+    left: 12px;
+    transform: none;
+    min-width: 180px;
+  }
+  #overlay {
+    padding: 90px 7% 25px;
+  }
+  .briefing {
+    max-width: 470px;
+  }
+  #message {
+    top: 165px;
+  }
+}
