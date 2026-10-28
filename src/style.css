@@ -1,4 +1,6 @@
 :root {
+  /* Interface unit: 1px at ~1500×860, grows on large monitors (≈1.7px at 2560×1440). */
+  --u: clamp(1px, min(100vw / 1500, 100vh / 860), 2.4px);
   font-family: Consolas, 'Courier New', monospace;
   color: #e4eee7;
   background: #101c24;
@@ -35,128 +37,142 @@ canvas {
 }
 header {
   position: absolute;
+  z-index: 2;
   inset: 0 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 22px 30px;
-  background: linear-gradient(#0b151eee, transparent);
+  padding: calc(22 * var(--u)) calc(30 * var(--u));
+  background: none;
   pointer-events: none;
 }
 header > * {
   pointer-events: auto;
 }
-.brand {
-  font-size: 24px;
-  letter-spacing: 4px;
-  text-decoration: none;
-  color: #e8efe7;
-  font-weight: bold;
-}
-.brand span {
-  color: #d9f879;
-}
-.brand small {
-  display: block;
-  font-size: 9px;
-  letter-spacing: 3px;
-  color: #8baba9;
-  margin-top: 5px;
-}
 .mission {
-  font-size: 12px;
+  flex: 1;
+  font-size: calc(12 * var(--u));
   letter-spacing: 2px;
   text-align: center;
 }
 .mission small {
   display: block;
-  font-size: 10px;
+  font-size: calc(10 * var(--u));
   color: #9bb4b2;
   letter-spacing: 0;
-  margin-top: 7px;
+  margin-top: calc(7 * var(--u));
 }
 .mission i {
   display: inline-block;
-  width: 6px;
-  height: 6px;
+  width: calc(6 * var(--u));
+  height: calc(6 * var(--u));
   background: #d9f879;
-  margin-right: 10px;
+  margin-right: calc(10 * var(--u));
 }
 header button {
   background: #11232cbb;
   border: 1px solid #516b6b;
-  padding: 10px 15px;
-  font-size: 10px;
+  padding: calc(10 * var(--u)) calc(15 * var(--u));
+  font-size: calc(10 * var(--u));
 }
 .panel {
   background: #0b1c25df;
   border: 1px solid #5e88834d;
-  box-shadow: 0 8px 30px #07121933;
-  padding: 16px;
+  box-shadow: 0 calc(8 * var(--u)) calc(30 * var(--u)) #07121933;
+  padding: calc(16 * var(--u));
 }
 .eyebrow {
-  font-size: 9px;
+  font-size: calc(9 * var(--u));
   letter-spacing: 1.5px;
   color: #8eaaa8;
 }
-.eyebrow span {
+.eyebrow span:last-child:not(:first-child) {
   float: right;
   color: #d9f879;
 }
-.telemetry {
+/* In flight only the language and pause buttons stay in the header. */
+.in-battle .mission {
+  display: none;
+}
+/* Top-left column: flight data, then armament. */
+.hud-left {
   position: absolute;
-  bottom: 72px;
-  left: 28px;
-  width: 320px;
+  top: calc(22 * var(--u));
+  left: calc(28 * var(--u));
+  width: calc(320 * var(--u));
+  display: flex;
+  flex-direction: column;
+  gap: calc(10 * var(--u));
+}
+.flight-readout {
+  width: auto;
+  max-width: 42vw;
+  gap: calc(5 * var(--u));
+  color: #fff;
+  font-size: calc(14 * var(--u));
+  font-weight: 700;
+  line-height: 1.25;
+  text-shadow: none;
+}
+.g-status {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #fff;
+  font-size: calc(14 * var(--u));
+  font-variant-numeric: tabular-nums;
+}
+.readout-line {
+  white-space: nowrap;
+  word-spacing: calc(2 * var(--u));
+}
+.readout-line b {
+  font-weight: inherit;
+  font-variant-numeric: tabular-nums;
+}
+.flight-secondary,
+.flight-readout #config {
+  color: #fff;
+  font-size: calc(11 * var(--u));
+}
+.flight-readout #config {
+  margin-top: 0;
+  max-width: calc(290 * var(--u));
+}
+.telemetry {
+  padding: calc(14 * var(--u)) calc(16 * var(--u));
 }
 .gauges {
   display: flex;
   justify-content: space-between;
-  margin: 18px 0;
+  margin: calc(18 * var(--u)) 0;
 }
 .gauges b {
   display: block;
-  font-size: 28px;
+  font-size: calc(24 * var(--u));
   font-weight: normal;
 }
 .gauges small {
-  font-size: 9px;
+  font-size: calc(9 * var(--u));
   color: #8faeac;
   display: block;
-  margin-top: 5px;
-}
-.health-track {
-  height: 3px;
-  background: #41585c;
-}
-.health-track div {
-  height: 100%;
-  background: #d9f879;
-  transition: width 0.2s;
-}
-#status {
-  font-size: 9px;
-  letter-spacing: 1px;
-  color: #d9f879;
-  margin-top: 10px;
+  margin-top: calc(5 * var(--u));
 }
 .weapons {
-  position: absolute;
-  right: 28px;
-  top: 108px;
-  width: 218px;
+  padding: calc(12 * var(--u)) calc(16 * var(--u));
 }
 .weapons > div:not(:first-child) {
-  font-size: 11px;
+  font-size: calc(11 * var(--u));
   display: flex;
   align-items: center;
-  gap: 9px;
-  margin-top: 15px;
+  gap: calc(9 * var(--u));
+  margin-top: calc(9 * var(--u));
 }
 .weapons span {
-  font-size: 9px;
+  font-size: calc(9 * var(--u));
   color: #9ab4b1;
-  width: 57px;
+  width: calc(57 * var(--u));
 }
 .weapons b {
   margin-left: auto;
@@ -165,16 +181,18 @@ header button {
 }
 .radar {
   position: absolute;
-  right: 28px;
-  bottom: 72px;
-  width: 224px;
-  padding: 14px 16px;
+  right: calc(28 * var(--u));
+  bottom: calc(72 * var(--u));
+  width: calc(360 * var(--u));
+  padding: calc(14 * var(--u)) calc(16 * var(--u));
 }
 .radar canvas {
-  margin: 12px 0;
+  width: 100%;
+  height: auto;
+  margin: calc(12 * var(--u)) 0;
 }
 .radar small {
-  font-size: 8px;
+  font-size: calc(10 * var(--u));
   color: #a7cac3;
 }
 .radar em {
@@ -186,126 +204,19 @@ footer {
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 17px 28px;
+  padding: calc(17 * var(--u)) calc(28 * var(--u));
   background: #0b1923eb;
   color: #9cb4b2;
   display: flex;
   justify-content: space-between;
-  font-size: 9px;
+  font-size: calc(9 * var(--u));
 }
 kbd {
   font: inherit;
   color: #dde9d5;
   border: 1px solid #48615f;
-  padding: 3px 4px;
-  margin-right: 3px;
-}
-#message {
-  position: absolute;
-  top: 112px;
-  left: 50%;
-  transform: translateX(-50%);
-  color: #d9f879;
-  text-align: center;
-  font-size: 12px;
-  background: #0c1b24c9;
-  padding: 10px 20px;
-  border-left: 2px solid #d9f879;
-  max-width: 50%;
-}
-#message:empty {
-  display: none;
-}
-#target {
-  position: absolute;
-  bottom: 82px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 11px;
-  text-align: center;
-  min-width: 240px;
-  color: #d9f879;
-}
-#overlay {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  padding: 80px 8%;
-  background: linear-gradient(90deg, #0b1927f5 0%, #0b1927e8 38%, #0b192745 80%);
-}
-.briefing {
-  max-width: 570px;
-}
-h1 {
-  font-size: clamp(38px, 5vw, 70px);
-  line-height: 1.04;
-  letter-spacing: -3px;
-  margin: 25px 0;
-  color: #f1f4e9;
-}
-h1 span {
-  color: #d9f879;
-}
-p {
-  font-size: 13px;
-  line-height: 1.8;
-  color: #a6bcb9;
-}
-.aircraft-picker {
-  display: flex;
-  gap: 12px;
-  margin: 27px 0 15px;
-}
-.aircraft-picker button {
-  background: #172b34;
-  border: 1px solid #435c60;
-  padding: 17px 20px;
-  text-align: left;
-  flex: 1;
-}
-.aircraft-picker .selected {
-  border-color: #d9f879;
-  background: #b1d65115;
-}
-.aircraft-picker strong {
-  font-size: 21px;
-  display: block;
-  font-weight: normal;
-}
-.aircraft-picker small {
-  display: block;
-  font-size: 8px;
-  letter-spacing: 1px;
-  color: #95afab;
-  margin-top: 8px;
-}
-.primary {
-  display: block;
-  width: 100%;
-  padding: 18px 20px;
-  background: #d9f879;
-  color: #17251e;
-  border: 0;
-  font-weight: bold;
-  letter-spacing: 2px;
-  text-align: left;
-}
-.primary span {
-  float: right;
-}
-.brief-controls {
-  font-size: 11px;
-  line-height: 1.9;
-  margin-top: 23px;
-  color: #becdc3;
-}
-.note {
-  display: block;
-  font-size: 9px;
-  color: #769592;
-  line-height: 1.8;
-  margin-top: 16px;
+  padding: calc(3 * var(--u)) calc(4 * var(--u));
+  margin-right: calc(3 * var(--u));
 }
 [hidden] {
   display: none !important;
@@ -315,46 +226,418 @@ button:hover {
 }
 @media (max-width: 800px) {
   header {
-    padding: 16px;
+    padding: calc(16 * var(--u));
   }
   .mission {
     display: none;
   }
-  .weapons {
-    right: 12px;
-    width: 175px;
-    padding: 12px;
-  }
-  .telemetry {
-    left: 12px;
-    width: 260px;
-    bottom: 65px;
+  .hud-left {
+    left: calc(12 * var(--u));
+    width: calc(260 * var(--u));
   }
   .radar {
-    right: 12px;
-    bottom: 65px;
+    right: calc(12 * var(--u));
+    bottom: calc(65 * var(--u));
     transform: scale(0.8);
     transform-origin: bottom right;
   }
   footer {
-    font-size: 8px;
-    padding: 12px;
-    gap: 15px;
+    font-size: calc(8 * var(--u));
+    padding: calc(12 * var(--u));
+    gap: calc(15 * var(--u));
   }
-  #target {
-    bottom: auto;
-    top: 100px;
-    left: 12px;
-    transform: none;
-    min-width: 180px;
+  .damage {
+    display: none;
   }
-  #overlay {
-    padding: 90px 7% 25px;
+}
+
+#game canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+#vignette {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(ellipse at center, transparent 30%, #000 85%);
+}
+#markers {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.marker {
+  position: absolute;
+  transform: translate(-50%, -100%);
+  font-size: calc(12 * var(--u));
+  white-space: nowrap;
+  color: #ff9a80;
+  text-shadow: 0 1px 2px #000;
+  padding-bottom: calc(14 * var(--u));
+}
+.marker span {
+  padding: calc(3 * var(--u)) calc(6 * var(--u));
+  background: #07131cdb;
+  border: 1px solid currentColor;
+  border-radius: calc(3 * var(--u));
+}
+.marker:not(.edge)::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: calc(8 * var(--u));
+  height: calc(8 * var(--u));
+  border: calc(2 * var(--u)) solid currentColor;
+  transform: translate(-50%, 50%) rotate(45deg);
+}
+.marker.selected {
+  color: #ffd27a;
+}
+.marker.locked {
+  color: #d9f879;
+}
+.marker.threat {
+  color: #ff5a40;
+  font-weight: bold;
+  animation: blink 0.5s steps(2) infinite;
+}
+.marker.edge {
+  transform: translate(-50%, -50%);
+  padding-bottom: 0;
+}
+.marker i {
+  display: inline-block;
+  font-style: normal;
+  margin-right: calc(4 * var(--u));
+}
+@keyframes blink {
+  50% {
+    opacity: 0.35;
   }
-  .briefing {
-    max-width: 470px;
+}
+.grid {
+  display: grid;
+  grid-template-columns: auto 1fr auto 1fr;
+  gap: calc(4 * var(--u)) calc(10 * var(--u));
+  font-size: calc(11 * var(--u));
+}
+.grid span {
+  color: #8faeac;
+  font-size: calc(9 * var(--u));
+  align-self: center;
+}
+.grid b {
+  font-weight: normal;
+}
+.bars {
+  display: flex;
+  gap: calc(6 * var(--u));
+  margin-top: calc(12 * var(--u));
+}
+.bar {
+  flex: 1;
+  height: calc(4 * var(--u));
+  background: #33494d;
+}
+.bar i {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: #d9f879;
+}
+.bar.g i {
+  background: #ffc46b;
+}
+.bar.fuel i {
+  background: #85c9c1;
+}
+#config {
+  margin-top: calc(10 * var(--u));
+  font-size: calc(9 * var(--u));
+  letter-spacing: 0.5px;
+  color: #a9c1bd;
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(4 * var(--u)) calc(8 * var(--u));
+}
+#config .on {
+  color: #d9f879;
+}
+#config .bad {
+  color: #ff8b74;
+}
+.weapons em {
+  font-style: normal;
+}
+.weapons .active {
+  color: #d9f879;
+}
+.damage {
+  position: absolute;
+  left: calc(28 * var(--u));
+  bottom: calc(72 * var(--u));
+  width: calc(170 * var(--u));
+  padding: 0;
+}
+#modules {
+  list-style: none;
+  margin: calc(8 * var(--u)) 0 0;
+  padding: 0;
+  font-size: calc(10 * var(--u));
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: calc(3 * var(--u)) calc(14 * var(--u));
+}
+#modules li {
+  display: flex;
+  justify-content: space-between;
+  gap: calc(8 * var(--u));
+  color: #a9c1bd;
+}
+#modules .hurt {
+  color: #ffd27a;
+}
+#modules .crit,
+#modules .fire {
+  color: #ff8b74;
+}
+#modules .dead {
+  color: #7d6e6a;
+  text-decoration: line-through;
+}
+#warnings {
+  position: absolute;
+  top: 34%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  font-size: calc(18 * var(--u));
+  letter-spacing: calc(3 * var(--u));
+  color: #ff8b74;
+  text-shadow: 0 2px calc(6 * var(--u)) #000;
+}
+#warnings div {
+  margin-bottom: calc(6 * var(--u));
+}
+#warnings .caution {
+  color: #ffd27a;
+  font-size: calc(13 * var(--u));
+}
+#messages {
+  position: absolute;
+  top: calc(100 * var(--u));
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  font-size: calc(12 * var(--u));
+  max-width: 50%;
+}
+#messages div {
+  background: #0c1b24c9;
+  border-left: 2px solid #d9f879;
+  color: #d9f879;
+  padding: calc(7 * var(--u)) calc(16 * var(--u));
+  margin-bottom: calc(4 * var(--u));
+}
+#messages .warning {
+  border-color: #ff8b74;
+  color: #ffb3a1;
+}
+.segmented {
+  display: flex;
+  margin-top: calc(8 * var(--u));
+}
+.segmented button {
+  background: #172b34;
+  border: 1px solid #435c60;
+  padding: calc(9 * var(--u)) calc(12 * var(--u));
+  font-size: calc(10 * var(--u));
+}
+.segmented .selected {
+  border-color: #d9f879;
+  color: #d9f879;
+}
+.header-buttons {
+  display: flex;
+  margin-left: auto;
+  gap: calc(8 * var(--u));
+}
+.audio-volume {
+  display: flex;
+  align-items: center;
+  gap: calc(6 * var(--u));
+  padding: calc(6 * var(--u));
+  background: #101c24df;
+  color: #d9e3e8;
+  font-size: calc(11 * var(--u));
+}
+.audio-volume input {
+  width: calc(70 * var(--u));
+  accent-color: #d9f879;
+  cursor: pointer;
+}
+#schematic {
+  width: 100%;
+  height: calc(130 * var(--u));
+  margin-top: 0;
+  image-rendering: auto;
+}
+
+/* Main menu: the hangar scene fills the screen, the UI floats over it. */
+#overlay {
+  position: fixed;
+  inset: 0;
+}
+#hangar-view {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+  image-rendering: pixelated;
+  touch-action: none;
+}
+#hangar-view:active {
+  cursor: grabbing;
+}
+.mission {
+  display: none;
+}
+.aircraft-picker {
+  position: absolute;
+  left: calc(28 * var(--u));
+  top: 50%;
+  transform: translateY(-50%);
+  width: calc(330 * var(--u));
+  display: flex;
+  flex-direction: column;
+  gap: calc(10 * var(--u));
+}
+.aircraft-picker button {
+  display: flex;
+  align-items: center;
+  gap: calc(12 * var(--u));
+  padding: calc(10 * var(--u)) calc(14 * var(--u));
+  background: #0b1c25d9;
+  border: 1px solid #5e88834d;
+  text-align: left;
+}
+.aircraft-picker .selected {
+  border-color: #d9f879;
+  background: #1a2e1fd9;
+}
+.aircraft-picker img {
+  width: calc(112 * var(--u));
+  height: calc(64 * var(--u));
+  image-rendering: pixelated;
+  flex: none;
+}
+.aircraft-picker strong {
+  display: block;
+  font-size: calc(17 * var(--u));
+  font-weight: normal;
+}
+.hangar-specs {
+  position: absolute;
+  right: calc(28 * var(--u));
+  top: 50%;
+  transform: translateY(-50%);
+  width: calc(380 * var(--u));
+  display: grid;
+  gap: calc(7 * var(--u));
+  font-size: calc(12 * var(--u));
+  padding: calc(20 * var(--u)) calc(22 * var(--u));
+}
+.hangar-specs div {
+  display: flex;
+  justify-content: space-between;
+  gap: calc(10 * var(--u));
+  border-bottom: 1px solid #2a3d42;
+  padding-bottom: calc(5 * var(--u));
+}
+.hangar-specs span {
+  color: #8faeac;
+}
+.hangar-specs b {
+  font-weight: normal;
+  color: #e4eee7;
+  text-align: right;
+}
+.hangar-specs .spec-detail {
+  display: block;
+  margin-top: calc(4 * var(--u));
+  font-size: calc(10 * var(--u));
+  color: #8faeac;
+}
+.hangar-specs .hangar-title {
+  display: block;
+  border: 0;
+  font-size: calc(26 * var(--u));
+  color: #f1f4e9;
+  margin-bottom: calc(8 * var(--u));
+}
+.hangar-title small {
+  display: block;
+  font-size: calc(10 * var(--u));
+  letter-spacing: 1.5px;
+  color: #d9f879;
+  margin-top: calc(6 * var(--u));
+}
+.launch {
+  position: absolute;
+  left: 50%;
+  bottom: calc(36 * var(--u));
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(12 * var(--u));
+}
+.primary {
+  min-width: calc(320 * var(--u));
+  padding: calc(18 * var(--u)) calc(28 * var(--u));
+  background: #d9f879;
+  color: #17251e;
+  border: 0;
+  font-weight: bold;
+  font-size: calc(15 * var(--u));
+  letter-spacing: 3px;
+}
+.launch .segmented {
+  margin: 0;
+}
+.launch .segmented button {
+  background: #0b1c25d9;
+  min-width: calc(160 * var(--u));
+}
+@media (max-width: 800px) {
+  .hangar-specs {
+    display: none;
   }
-  #message {
-    top: 165px;
-  }
+}
+/* Language switch: two flags, the active one framed and the other dimmed. */
+.lang {
+  display: flex;
+  gap: calc(4 * var(--u));
+}
+.lang button {
+  padding: calc(5 * var(--u));
+  line-height: 0;
+  opacity: 0.55;
+}
+.lang button.selected {
+  opacity: 1;
+  border-color: #d9f879;
+}
+.lang svg {
+  width: calc(30 * var(--u));
+  height: calc(20 * var(--u));
+  display: block;
+}
+/* Mouse aim in flight: a precise cursor over the scene. */
+.in-battle #game {
+  cursor: crosshair;
 }

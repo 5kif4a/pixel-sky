@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="icon" href="data:," />
+    <title>Pixel Sky · Model preview</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 16px;
+        background: #16191b;
+        color: #dde6e2;
+        font:
+          13px Consolas,
+          monospace;
+      }
+      header {
+        display: flex;
+        gap: 24px;
+        align-items: center;
+        margin-bottom: 12px;
+      }
+      #views {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+      }
+      figure {
+        margin: 0;
+      }
+      figcaption {
+        margin-bottom: 4px;
+        color: #9fb4b0;
+        letter-spacing: 2px;
+      }
+      a {
+        color: #d9f879;
+      }
+      canvas {
+        display: block;
+        max-width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <b>Low-poly · blueprint overlay</b>
+      <span
+        ><a href="?id=MiG-35">MiG-35</a> · <a href="?id=F-16">F-16C</a> ·
+        <a href="?id=Mirage%202000">Mirage 2000-5</a></span
+      >
+      <label>model opacity <input id="opacity" type="range" min="0" max="100" value="60" /></label>
+      <label><input id="wire" type="checkbox" checked /> wireframe</label>
+      <span id="count"></span>
+    </header>
+    <div id="views"></div>
+    <script type="module" src="/src/tools/modelPreview.ts"></script>
+  </body>
+</html>
